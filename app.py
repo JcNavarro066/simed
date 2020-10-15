@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,
 from flask_db2 import DB2
 # from database import database
 
@@ -15,9 +15,19 @@ db = DB2(app)
 # db = database(app)
 
 
+@app.route('/login.html')
+def sigin():
+    return render_template('auth/login.html')
+
+
+@app.route('/register.html')
+def register():
+    return render_template('auth/register.html')
+
+
 @app.route('/')
 def hello():
-    return 'Hello'
+    return render_template('home.html')
 
 
 @app.route('/user', methods=['POST', 'GET'])
