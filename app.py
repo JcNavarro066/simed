@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,
 from flask_db2 import DB2
 
 app = Flask(__name__)
@@ -12,13 +12,16 @@ app.config['DB2_PASSWORD'] = '14ww1r21s31q8l@b'
 
 db = DB2(app)
 
-@app.route('/signin.html')
+
+@app.route('/login.html')
 def sigin():
-    return render_template('signin.html')
+    return render_template('auth/login.html')
+
 
 @app.route('/register.html')
 def register():
-    return render_template('register.html')
+    return render_template('auth/register.html')
+
 
 @app.route('/')
 def hello():
