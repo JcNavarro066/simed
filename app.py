@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
-from flask_db2 import DB2
+# from flask_db2 import DB2
+from database import database
 
 app = Flask(__name__)
 
@@ -10,7 +11,8 @@ app.config['DB2_PROTOCOL'] = 'TCPIP'
 app.config['DB2_USER'] = 'vnx75949'
 app.config['DB2_PASSWORD'] = '14ww1r21s31q8l@b'
 
-db = DB2(app)
+# db = DB2(app)
+db = database(app)
 
 
 @app.route('/')
@@ -34,7 +36,8 @@ def login():
 
 @app.route('/users')
 def users():
-    cur = db.connection.cursor()
+    d = db.get_db()
+    cur = d.connection.cursor()
     cur.execute('SELECT * FROM tblUser')
     response = cur.fetchall()
     print(response)

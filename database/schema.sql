@@ -1,0 +1,14 @@
+DROP TABLE tblUser;
+
+CREATE TABLE tblUser (
+	UserId  INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
+	F_Name VARCHAR(15) NOT NULL,
+	L_Name VARCHAR(15) NOT NULL,
+	PRIMARY KEY (UserId)	
+);
+
+INSERT INTO tblUser (F_Name, L_Name) 
+VALUES ('C', 'O');
+
+INSERT INTO tblUser (F_Name, L_Name) 
+VALUES ('Cesar', 'Navarro');
