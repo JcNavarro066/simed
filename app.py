@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_db2 import DB2
 # from database import database
 
@@ -12,12 +12,7 @@ app.config['DB2_USER'] = 'vnx75949'
 app.config['DB2_PASSWORD'] = '14ww1r21s31q8l@b'
 
 db = DB2(app)
-# db = database(app)
 
-
-# @app.route('/login.html')
-# def sigin():
-#   return render_template('auth/login.html')
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -68,8 +63,8 @@ def register_patient():
 
 
 @app.route('/')
-def home():
-    return render_template('home.html')
+def home(name=None):
+    return render_template('home.html', user=name)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -77,12 +72,19 @@ def login():
     if request.method == 'POST':
         user = request.form['user']
         password = request.form['password']
-        print(user)
-        print(password)
-        # d = db.get_db()
+
         cur = db.connection.cursor()
-        query = '''INSERT INTO tbllogin (email , password)
-                    VALUES ('%s', '%s')''' % (user, password)
+        query = '''SELECT f_name FROM tblUser WHERE email = '%s' AND password= '%s'
+        ''' % (user, password)
+
         cur.execute(query)
-        return redirect(url_for('home'))
+        response = cur.fetchone()
+
+        if (response is not None):
+            query = '''INSERT INTO tbllogin (email , password)
+                        VALUES ('%s', '%s')''' % (user, password)
+            cur.execute(query)
+            return redirect(url_for('home', name=response[0]))
+        else:
+            return redirect(url_for('register'))
     return render_template('auth/login.html')

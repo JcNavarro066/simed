@@ -2,6 +2,8 @@
 
 Senasoft IBM Medical Aplication. Solución propuesta para la hackaton SenaSoft 2020.
 
+Puede visitar la aplicación desplegada en el Coud de IBM dando click [Aquí](simed.myblemix.net).
+
 ## Comienzo rápido
 
 - Descargar el repositorio.
