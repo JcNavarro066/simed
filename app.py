@@ -12,10 +12,17 @@ app.config['DB2_PASSWORD'] = '14ww1r21s31q8l@b'
 
 db = DB2(app)
 
+@app.route('/signin.html')
+def sigin():
+    return render_template('signin.html')
+
+@app.route('/register.html')
+def register():
+    return render_template('register.html')
 
 @app.route('/')
 def hello():
-    return 'Hello'
+    return render_template('home.html')
 
 
 @app.route('/user', methods=['POST', 'GET'])
