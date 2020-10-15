@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,
+from flask import Flask, render_template, request, redirect, url_for
 from flask_db2 import DB2
 # from database import database
 
@@ -15,41 +15,74 @@ db = DB2(app)
 # db = database(app)
 
 
-@app.route('/login.html')
-def sigin():
-    return render_template('auth/login.html')
+# @app.route('/login.html')
+# def sigin():
+#   return render_template('auth/login.html')
 
-
-@app.route('/register.html')
+@app.route('/register', methods=['POST', 'GET'])
 def register():
+    if request.method == 'POST':
+        name = request.form['name']
+        lastname = request.form['lastname']
+        age = request.form['age']
+        dateBirth = request.form['datebirth']
+        gender = request.form['gender']
+        email = request.form['email']
+        password = request.form['password']
+        isDoctor = request.form.__contains__('isDoctor')
+        cur = db.connection.cursor()
+        query = '''INSERT INTO tblUser (email , password, f_name, l_name, dateOfBirth, age, gender)
+                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')''' % (email, password, name, lastname, dateBirth, age, gender)
+        cur.execute(query)
+        if (isDoctor):
+            return redirect(url_for('register_doctor'))
+        return redirect(url_for('register_patient'))
     return render_template('auth/register.html')
 
 
+@app.route('/register/doctor', methods=['POST', 'GET'])
+def register_doctor():
+    if request.method == 'POST':
+        professionalRegister = request.form['professionalRegister']
+        especialism = request.form['especialism']
+        cur = db.connection.cursor()
+        query = '''INSERT INTO tblDoctor (professionalRegister , especialism)
+                    VALUES ('%s', '%s')''' % (professionalRegister, especialism)
+        cur.execute(query)
+        return redirect(url_for('login'))
+    return render_template('auth/register_doctor.html')
+
+
+@app.route('/register/patient', methods=['POST', 'GET'])
+def register_patient():
+    if request.method == 'POST':
+        civilState = request.form['civilState']
+        ocupation = request.form['ocupation']
+        address = request.form['address']
+        cur = db.connection.cursor()
+        query = '''INSERT INTO tblPatient (civilState , ocupation, address)
+                    VALUES ('%s', '%s', '%s')''' % (civilState, ocupation, address)
+        cur.execute(query)
+        return redirect(url_for('login'))
+    return render_template('auth/register_patient.html')
+
+
 @app.route('/')
-def hello():
+def home():
     return render_template('home.html')
 
 
-@app.route('/user', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        F_Name = request.form['F_Name']
-        L_Name = request.form['L_Name']
-        print(F_Name)
-        print(L_Name)
+        user = request.form['user']
+        password = request.form['password']
+        print(user)
+        print(password)
         # d = db.get_db()
         cur = db.connection.cursor()
-        query = '''INSERT INTO tblUser (F_Name , L_Name)
-                    VALUES ('%s', '%s')''' % (F_Name, L_Name)
+        query = '''INSERT INTO tbllogin (email , password)
+                    VALUES ('%s', '%s')''' % (user, password)
         cur.execute(query)
-        cur.fetchall()
-    return render_template('user.html')
-
-
-@app.route('/users', methods=['GET'])
-def users():
-    # d = db.get_db()
-    cur = db.connection.cursor()
-    cur.execute('SELECT * FROM tblUser')
-    response = cur.fetchall()
-    print(response)
+        return redirect(url_for('home'))
+    return render_template('auth/login.html')

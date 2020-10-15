@@ -10,55 +10,54 @@
   <h1>Registrarse</h1>
   <p class="important">
       <section>
-        <form>
+        <form  action="/register" method="POST">
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Correo electronico</label>
-                <input type="email" class="form-control" id="inputEmail4">
+                <input type="email" class="form-control" id="inputEmail4" name="email">
               </div>
               <div class="form-group col-md-6">
                 <label for="inputPassword4">Contraseña</label>
-                <input type="password" class="form-control" id="inputPassword4">
+                <input type="password" class="form-control" id="inputPassword4" name="password">
               </div>
             </div>
             <div class="form-group">
               <label for="inputName">Nombre</label>
-              <input type="text" class="form-control" id="inputName" >
+              <input type="text" class="form-control" id="inputName" name="name">
             </div>
             <div class="form-group">
               <label for="inputLastname">Apellido</label>
-              <input type="text" class="form-control" id="inputLastname" >
+              <input type="text" class="form-control" id="inputLastname" name="lastname" >
             </div>
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="inputage">Edad</label>
-                <input type="number" class="form-control" id="inputage">
+                <input type="number" class="form-control" id="inputage" name="age">
               </div>
               <div class="form-group col-md-4">
                 <label for="inputDatebirth">Fecha de nacimiento</label>
-                <input type="date" class="form-control" id="inputDatebirth">
+                <input type="date" class="form-control" id="inputDatebirth" name="datebirth">
               </div>
               <div class="form-group col-md-4">
                 <label for="inputGender">Genero</label>
-                <select id="inputGender" class="form-control">
+                <select id="inputGender" class="form-control" name="gender">
                   <option selected>Masculino</option>
                   <option>Femenino</option>
                   <option>Otro</option>
                 </select>
               </div>
               <div class="form-group col-md-4">
-                <label for="inputCity">Teléfono</label>
-                <input type="tel" class="form-control" id="inputCity">
+                <label for="inputTel">Teléfono</label>
+                <input type="tel" class="form-control" id="inputTel">
               </div>
             </div>
             <div class="form-group">
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
+                <input class="form-check-input" name="isDoctor" type="checkbox" id="gridCheck">
                 <label class="form-check-label" for="gridCheck">
-                  Acepto terminos y condiciones.
+                  Soy Medico.
                 </label>
               </div>
-            
             </div>
             <button type="submit" class="btn btn-primary">Sign in</button>
           </form>

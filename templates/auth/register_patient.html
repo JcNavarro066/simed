@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %} Registrarse {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+  <h1>Registrarse</h1>
+  <p class="important">
+      <section>
+        <form  action="/register/patient" method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="civilState">Estado civil</label>
+                <input type="text" class="form-control" id="civilState" name="civilState">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="ocupation">Ocupación</label>
+                <input type="text" class="form-control" id="ocupation" name="ocupation">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="address">Dirección</label>
+                <input type="Texto" class="form-control" id="address" name="address">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Completar Registro</button>
+          </form>
+      </section>
+{% endblock %}

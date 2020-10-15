@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %} Registrarse {% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+  <h1>Hola Doc</h1>
+  <p class="important">
+      <section>
+        <form  action="/register/doctor" method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="professionalRegister">Matricula Profesional</label>
+                <input type="text" class="form-control" id="inputprofessionalRegister" name="professionalRegister">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="especialism">Especialidad</label>
+                <input type="Texto" class="form-control" id="especialism" name="especialism">
+              </div>
+            <button type="submit" class="btn btn-primary">Completar Registro</button>
+          </form>
+      </section>
+{% endblock %}
