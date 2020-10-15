@@ -4,6 +4,8 @@ Senasoft IBM Medical Aplication. Solución propuesta para la hackaton SenaSoft 2
 
 Puede visitar la aplicación desplegada en el Coud de IBM dando click [Aquí](simed.myblemix.net).
 
+Puede visitar el repositorio acá https://github.com/JcNavarro066/simed.git
+
 ## Comienzo rápido
 
 - Descargar el repositorio.
